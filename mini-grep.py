@@ -1,5 +1,5 @@
 import sys
-import re
+import re, os
 from inputParser import parseInputs
 
 printlineNos = False
@@ -14,26 +14,31 @@ if "-q" in optionsMap:
 
 if "-e" not in optionsMap:
     print("Insufficient inputs: Regex pattern needed") 
-    sys.exit(2)
+    sys.exit(1)
 
 pattern = optionsMap["-e"]
 
 if args:
     fromFile = True
     filepaths = args
-    filepath = filepaths[-1]
 
-def printFromFile(filepath):
-    count = 0
-    file = open(filepath, "r")
-    for line in file:
-        count += 1
-        if re.search(pattern, line):
-            if printlineNos:
-                output = 'line no: %(number)s, %(line)s' % {"number": count, "line": line }
-            else:
-                output = '%(line)s' % {"line": line }
-            print(output)
+def printFromFile(filepaths):
+    for filepath in filepaths:
+        
+        if not os.path.exists(filepath):
+            print("Unexpected inputs: Invalid Path")
+            sys.exit(1)
+        
+        file = open(filepath, "r")
+        count = 0
+        for line in file:
+            count += 1
+            if re.search(pattern, line):
+                if printlineNos:
+                    output = 'line no: %(number)s, %(line)s' % {"number": count, "line": line }
+                else:
+                    output = '%(line)s' % {"line": line }
+                print(output)
 
 def printFromStdIn():
     count = 0
@@ -49,7 +54,7 @@ def printFromStdIn():
  
 if fromFile:
     # process from filepath
-    printFromFile(filepath)
+    printFromFile(filepaths)
 else:
     # process from std input
     printFromStdIn()

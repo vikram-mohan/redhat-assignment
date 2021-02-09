@@ -23,8 +23,12 @@ def convert(size):
 units = {'units': 'BYTES'}
 
 for filepath in filepaths:
+    
+    if not os.path.exists(filepath):
+        print("Unexpected inputs: Invalid Path")
+        sys.exit(1)
+    
     for dirpath, _ , _  in os.walk(filepath):
-
         total, used, free = shutil.disk_usage(filepath)
         args = {'arg1':total, 'arg2':used, 'arg3':free}
         

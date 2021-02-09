@@ -4,7 +4,7 @@ import os
 class TestSum(unittest.TestCase):
 
     def test_mini_grep(self):
-        stream = os.popen('python3 ../mini-grep.py -e \d ./data.txt')
+        stream = os.popen('python3 ../mini-grep.py -e \\d ./data.txt')
         output = stream.read()
 
         #verify that the output is not empty
@@ -12,7 +12,7 @@ class TestSum(unittest.TestCase):
         self.assertTrue(output)
     
     def test_mini_grep_withLineNo(self):
-        stream = os.popen('python3 ../mini-grep.py -q -e \d ./data.txt')
+        stream = os.popen('python ../mini-grep.py -q -e \\d ./data.txt')
         output = stream.read()
 
         #verify that the output is not empty
