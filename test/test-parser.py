@@ -18,7 +18,7 @@ class TestSum(unittest.TestCase):
     def test_parseInputs_args(self):
         arguments = ["-e", "//d", "DUMMYFILE"]
         args , _ = parseInputs(arguments, "qe:")
-        self.assertEqual(args[-1], "DUMMYFILE")
+        self.assertEqual(args[-1], "DUMMYFILE")    
 
 if __name__ == '__main__':
     unittest.main()

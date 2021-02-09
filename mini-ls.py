@@ -25,6 +25,7 @@ for filepath in filepaths:
     
     for dirpath, _ , _  in os.walk(filepath):
         
+        dirpath = os.path.abspath(dirpath)
         stats = os.stat(dirpath)
         print('Path: ({}):'.format(dirpath))
         print('Owner', pwd.getpwuid(stats.st_uid).pw_name)

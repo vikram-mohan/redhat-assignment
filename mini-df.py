@@ -23,7 +23,7 @@ def convert(size):
 units = {'units': 'BYTES'}
 
 for filepath in filepaths:
-    
+
     if not os.path.exists(filepath):
         print("Unexpected inputs: Invalid Path")
         sys.exit(1)
@@ -43,5 +43,3 @@ for filepath in filepaths:
     
         print(output)
         break
-
-
